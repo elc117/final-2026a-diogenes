@@ -2,6 +2,7 @@
 
 import com.diogenes.wolfpack.effects.StatusEffect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Unit {
@@ -16,7 +17,7 @@ public abstract class Unit {
     protected int defense;
     protected int speed;
 
-    protected List<StatusEffect> statusEffects; // TODO: inicializar como arraylist no construtor
+    protected List<StatusEffect> statusEffects;
 
     public Unit(String name, int maxHp, int attack, int defense, int speed){
         this.name = name;
@@ -27,6 +28,7 @@ public abstract class Unit {
         this.speed = speed;
         this.xp = 0;
         this.level = 1;
+        this.statusEffects = new ArrayList<>();
     }
 
     public boolean isAlive(){
@@ -56,5 +58,41 @@ public abstract class Unit {
         return healAmount;
     }
 
+    public void addStatusEffect(StatusEffect effect){
+        this.statusEffects.add(effect);
+        // effect.applyEffect(this); // TODO: DESIGN DECISION
+    }
 
+    public void removeStatusEffect(StatusEffect effect){
+        effect.onRemove(this);
+        this.statusEffects.remove(effect);
+    }
+
+    public List<StatusEffect> getStatusEffects() {
+        return this.statusEffects;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public int getAttack() {
+        return this.attack;
+    }
 }
