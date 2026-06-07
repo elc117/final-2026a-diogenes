@@ -10,7 +10,6 @@ public class Bite extends Skill {
 
     @Override
     public void execute(Unit user, Unit target) {
-
         target.takeDamage(user.getAttack());
 
     }

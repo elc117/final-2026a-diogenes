@@ -1,6 +1,7 @@
 ﻿package com.diogenes.wolfpack.entities;
 
 import com.diogenes.wolfpack.effects.StatusEffect;
+import com.diogenes.wolfpack.skills.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ public abstract class Unit {
 
     protected String name;
     protected int level;
-    protected int xp; // TODO: sera refatorado pra apenas os playables charactears
 
     protected int maxHp;
     private int hp;
@@ -18,6 +18,7 @@ public abstract class Unit {
     protected int speed;
 
     protected List<StatusEffect> statusEffects;
+    protected List<Skill> skills;
 
     public Unit(String name, int maxHp, int attack, int defense, int speed){
         this.name = name;
@@ -26,9 +27,9 @@ public abstract class Unit {
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
-        this.xp = 0;
         this.level = 1;
         this.statusEffects = new ArrayList<>();
+        this.skills = new ArrayList<>();
     }
 
     public boolean isAlive(){
@@ -80,10 +81,6 @@ public abstract class Unit {
         return level;
     }
 
-    public int getXp() {
-        return xp;
-    }
-
     public int getHp() {
         return hp;
     }
@@ -94,5 +91,13 @@ public abstract class Unit {
 
     public int getAttack() {
         return this.attack;
+    }
+
+    public List<Skill> getSkills(){
+        return this.skills;
+    }
+
+    public void addSkill(Skill skill){
+        this.skills.add(skill);
     }
 }
