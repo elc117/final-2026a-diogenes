@@ -22,7 +22,7 @@ abstract public class StatusEffect {
         }
     }
 
-    abstract public void applyEffect(Unit target);
+    abstract public void onTurn(Unit target);
 
     abstract public void onRemove(Unit target);
 }

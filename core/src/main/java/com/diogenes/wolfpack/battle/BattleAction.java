@@ -1,4 +1,4 @@
-﻿package com.diogenes.wolfpack.battle;
+package com.diogenes.wolfpack.battle;
 
 import com.diogenes.wolfpack.entities.Unit;
 import com.diogenes.wolfpack.skills.Skill;

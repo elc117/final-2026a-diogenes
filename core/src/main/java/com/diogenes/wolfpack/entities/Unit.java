@@ -93,6 +93,14 @@ public abstract class Unit {
         return this.attack;
     }
 
+    public int getSpeed(){
+        return this.speed;
+    }
+
+    public int getDefense(){
+        return this.defense;
+    }
+
     public List<Skill> getSkills(){
         return this.skills;
     }

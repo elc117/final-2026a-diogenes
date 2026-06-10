@@ -1,4 +1,4 @@
-﻿package com.diogenes.wolfpack.entities;
+package com.diogenes.wolfpack.entities;
 
 import com.diogenes.wolfpack.battle.BattleAction;
 
