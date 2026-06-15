@@ -2,39 +2,36 @@ package com.diogenes.wolfpack.entities;
 
 public abstract class Wolf extends Unit {
 
-    protected int currentXp;
-    protected int xpThreshold;
+    private boolean hasTrained;
 
     public Wolf(String name, int maxHp, int attack, int defense, int speed) {
         super(name, maxHp, attack, defense, speed);
-        this.currentXp = 0;
-        this.xpThreshold = 100;
-
+        this.hasTrained = false;
     }
 
-    public void gainXp(int xp){
-        this.currentXp += xp;
-        levelUp();
+    public boolean trainAttack() {
+        if (hasTrained) return false;
+        this.attack++;
+        hasTrained = true;
+        return true;
     }
 
-    public void levelUp(){
-        while(currentXp >= xpThreshold) {
-            currentXp -= xpThreshold;
-            this.level++;
-            xpThreshold = (int) (xpThreshold * 1.5);
-            onLevelUp();
-        }
-    }
-
-    abstract void onLevelUp();
-
-    // Here attack is increased by 2 for balance purpouses
-    public void increaseAttack(){
-        this.attack += 2;
-    }
-
-    public void increaseDefense(){
+    public boolean trainDefense() {
+        if (hasTrained) return false;
         this.defense++;
+        hasTrained = true;
+        return true;
     }
 
+    public boolean trainMaxHp() {
+        if (hasTrained) return false;
+        this.maxHp += 5;
+        this.heal(5);
+        hasTrained = true;
+        return true;
+    }
+
+    public boolean hasTrained() {
+        return hasTrained;
+    }
 }
