@@ -1,21 +1,9 @@
 package com.diogenes.wolfpack.entities;
 
-import com.diogenes.wolfpack.skills.Bite;
+public class Healer extends Wolf {
 
-public class Healer extends Wolf{
     public Healer() {
         super("Espiritualista", 30, 4, 4, 6);
-
-        // Base skills to Healer Wolf
-        addSkill(new Bite());
-    }
-
-    @Override
-    void onLevelUp() {
-        this.maxHp += 2;
-        if(level % 2 == 0){
-            this.speed++;
-        }
-        // TODO: will get a new skill automatically in level 3, probably
     }
 }
+
