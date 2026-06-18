@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.diogenes.wolfpack.WolfPack;
 import com.diogenes.wolfpack.battle.BattleAction;
+import com.diogenes.wolfpack.battle.BattleLogEntry;
 import com.diogenes.wolfpack.battle.BattleManager;
 import com.diogenes.wolfpack.battle.BattleState;
 import com.diogenes.wolfpack.campaign.Campaign;
@@ -49,6 +50,9 @@ public class BattleScreen implements Screen {
     private CampActionType selectedCampAction;
     private int currentCampTargetIndex;
     private String campResultMessage;
+
+    private static final int MAX_LOG_ENTRIES = 5; // Maybe test with more?
+    private final List<String> battleLog = new ArrayList<>();
 
     public BattleScreen(final WolfPack game, final Campaign campaign) {
         this.game = game;
@@ -160,6 +164,15 @@ public class BattleScreen implements Screen {
         return false;
     }
 
+    private void addToBattleLog(List<BattleLogEntry> entries){
+        for(BattleLogEntry entry : entries){
+            battleLog.add(0, entry.format());
+        }
+        while(battleLog.size() > MAX_LOG_ENTRIES){
+            battleLog.remove(battleLog.size() - 1);
+        }
+    }
+
     // need to add a waiting time, or "space to continue"
     private void handleEnemyTurn(){
         BattleAction action = ((Enemy) battleManager.getCurrentUnit()).chooseAction(battleManager.getWolves());
@@ -167,7 +180,8 @@ public class BattleScreen implements Screen {
         // if action is null the enemy fled
         if(action == null) return;
 
-        battleManager.executeAction(battleManager.getCurrentUnit(), action);
+
+        addToBattleLog(battleManager.executeAction(battleManager.getCurrentUnit(), action));
     }
 
     private void beginCampPhase(){
@@ -330,7 +344,7 @@ public class BattleScreen implements Screen {
 
     // execute the selected skill and advances turn
     private void confirmAndExecute(Unit target){
-        battleManager.executeAction(battleManager.getCurrentUnit(), new BattleAction(selectedSkill, target));
+        addToBattleLog(battleManager.executeAction(battleManager.getCurrentUnit(), new BattleAction(selectedSkill, target)));
         currentSkillIndex = 0;
         currentTargetIndex = 0;
         advanceToNextTurn();
@@ -350,6 +364,7 @@ public class BattleScreen implements Screen {
         drawTurnInfo();
         drawWolves();
         drawEnemies();
+        drawBattleLog();
 
         // draw contextual ui based on the state
         if (currentState == BattleState.SELECT_SKILL) {
@@ -404,6 +419,17 @@ public class BattleScreen implements Screen {
                 x,
                 y
             );
+            y -= 20;
+        }
+    }
+
+    private void drawBattleLog() {
+        int y = 90;
+        game.font.draw(game.batch, "--- REGISTRO ---", 10, y);
+        y -= 20;
+
+        for (String entry : battleLog) {
+            game.font.draw(game.batch, entry, 10, y);
             y -= 20;
         }
     }
