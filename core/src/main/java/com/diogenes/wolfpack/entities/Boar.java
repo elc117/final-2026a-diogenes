@@ -12,6 +12,7 @@ public class Boar extends Enemy{
 
     public Boar() {
         super("Javali", 30, 6, 4, 4);
+        this.foodReward = 2;
 
         addSkill(new Bash());
         addSkill(new TuskSwing());

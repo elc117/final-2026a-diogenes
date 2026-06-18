@@ -18,6 +18,7 @@ public class BossBear extends Enemy {
 
     public BossBear() {
         super("Urso Maior", 75, 12, 7, 6);
+        this.foodReward = 8;
 
         addSkill(new Claw());
         addSkill(new FerociousRoar());

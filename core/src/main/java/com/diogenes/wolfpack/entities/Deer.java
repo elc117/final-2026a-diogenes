@@ -15,6 +15,7 @@ public class Deer extends Enemy {
 
     public Deer() {
         super("Cervo", 22, 3, 2, 8);
+        this.foodReward = 4;
 
         addSkill(new Kick());
         this.turnsTaken = 0;

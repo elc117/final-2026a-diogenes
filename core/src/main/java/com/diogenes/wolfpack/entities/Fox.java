@@ -10,6 +10,7 @@ public class Fox extends Enemy {
 
     public Fox() {
         super("Raposa", 18, 5, 2, 9);
+        this.foodReward = 1;
 
         addSkill(new FoxNip());
         addSkill(new QuickPounce());

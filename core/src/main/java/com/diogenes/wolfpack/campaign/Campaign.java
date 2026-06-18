@@ -35,7 +35,7 @@ public class Campaign {
         return true;
     }
 
-    // this is for the "debt" of daily food, even tho player doesnt have sufficient it will take away still
+    // this is for the "debt" of daily food, even tho player doesnt have sufficient it will take away still, but clamp to 0
     public void consumeFoodUpToZero(int amount) {
         this.food = Math.max(0, this.food - amount);
     }

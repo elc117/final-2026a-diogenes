@@ -12,6 +12,7 @@ public class Bear extends Enemy {
 
     public Bear() {
         super("Urso", 55, 10, 6, 5);
+        this.foodReward = 5;
 
         addSkill(new Claw());
         addSkill(new Roar());
