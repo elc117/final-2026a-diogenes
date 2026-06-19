@@ -1,6 +1,8 @@
 package com.diogenes.wolfpack.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -30,6 +32,7 @@ public class AssetLoader {
     public TextureRegion iconAttackUp;
     public TextureRegion iconAttackDown;
     public TextureRegion iconMarked;
+    public TextureRegion iconSelected;
 
     public TextureRegion whitePixel;
     public Texture winterBackground;
@@ -37,9 +40,9 @@ public class AssetLoader {
     public void load() {
         wolfSheet = new Texture(Gdx.files.internal("sprites/wolf_tailwag_full.png"));
         TextureRegion[][] wolfGrid = TextureRegion.split(wolfSheet, 32, 32);
-        wolfScout  = wolfGrid[1][0];
+        wolfScout = wolfGrid[1][0];
         wolfHealer = wolfGrid[1][3];
-        wolfAlpha  = wolfGrid[1][6];
+        wolfAlpha = wolfGrid[1][6];
 
         boarSheet = new Texture(Gdx.files.internal("sprites/Boar_Idle.png"));
         enemyBoar = TextureRegion.split(boarSheet, 64, 40)[0][0];
@@ -63,17 +66,24 @@ public class AssetLoader {
         iconSheet = new Texture(Gdx.files.internal("ui/16x16.png"));
         TextureRegion[][] iconGrid = TextureRegion.split(iconSheet, 16, 16);
 
-        whitePixel = new TextureRegion(new Texture(Gdx.files.internal("ui/white.png")));
+        // creating white pixel 1x1 through code and stored in memory
+        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+
+        Texture rawTexture = new Texture(pixmap);
+        whitePixel = new TextureRegion(rawTexture);
+        pixmap.dispose();
 
         winterBackground = new Texture(Gdx.files.internal("backgrounds/battlebg.png"));
 
-        // TODO: this are placeholders
-        iconBleed      = iconGrid[0][12];
-        iconAttackUp   = iconGrid[0][1];
-        iconAttackDown = iconGrid[0][2];
-        iconMarked     = iconGrid[0][3];
+        iconBleed = iconGrid[46][5];
+        iconAttackUp = iconGrid[68][9];
+        iconAttackDown = iconGrid[68][13];
+        iconMarked = iconGrid[40][15];
+        iconSelected = iconGrid[39][7];
         // campfire icon = iconGrid[230][907]
-        // [91][922]
+        // forge icon =  [91][922]
     }
 
     public void dispose() {
@@ -86,5 +96,6 @@ public class AssetLoader {
         if (rabbitSheet != null) rabbitSheet.dispose();
         if (iconSheet != null) iconSheet.dispose();
         if (winterBackground != null) winterBackground.dispose();
+        if (whitePixel != null && whitePixel.getTexture() != null) whitePixel.getTexture().dispose();
     }
 }
