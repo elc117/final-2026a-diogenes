@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.diogenes.wolfpack.WolfPack;
+import com.diogenes.wolfpack.assets.AssetLoader;
 import com.diogenes.wolfpack.battle.BattleAction;
 import com.diogenes.wolfpack.battle.BattleLogEntry;
 import com.diogenes.wolfpack.battle.BattleManager;
@@ -28,6 +29,7 @@ public class BattleScreen implements Screen {
     final WolfPack game;
     private final Campaign campaign;
     private final EncounterGenerator encounterGenerator;
+    private final AssetLoader assets;
 
     private BattleManager battleManager;
     private List<Wolf> wolves;
@@ -44,9 +46,10 @@ public class BattleScreen implements Screen {
     private static final int MAX_LOG_ENTRIES = 5; // Maybe test with more?
     private final List<String> battleLog = new ArrayList<>();
 
-    public BattleScreen(final WolfPack game, final Campaign campaign) {
+    public BattleScreen(final WolfPack game, final Campaign campaign, final AssetLoader assets) {
         this.game = game;
         this.campaign = campaign;
+        this.assets = assets;
         this.encounterGenerator = new EncounterGenerator();
     }
 
@@ -139,7 +142,7 @@ public class BattleScreen implements Screen {
                 currentState = BattleState.VICTORY;
             }
             else {
-                game.setScreen(new CampScreen(game, campaign, enemies));
+                game.setScreen(new CampScreen(game, campaign, enemies, assets));
         }
             return true;
         }

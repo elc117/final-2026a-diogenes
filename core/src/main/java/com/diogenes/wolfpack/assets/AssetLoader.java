@@ -57,11 +57,11 @@ public class AssetLoader {
         TextureRegion[][] bossBearGrid = TextureRegion.split(bossBearSheet, 76, 64);
         enemyBossBear = bossBearGrid[3][0];
 
-        iconSheet = new Texture(Gdx.files.internal("ui/16x16.jpg"));
+        iconSheet = new Texture(Gdx.files.internal("ui/16x16.png"));
         TextureRegion[][] iconGrid = TextureRegion.split(iconSheet, 16, 16);
 
-        // TODO: this are placed holders
-        iconBleed      = iconGrid[87][744];
+        // TODO: this are placeholders
+        iconBleed      = iconGrid[0][12];
         iconAttackUp   = iconGrid[0][1];
         iconAttackDown = iconGrid[0][2];
         iconMarked     = iconGrid[0][3];

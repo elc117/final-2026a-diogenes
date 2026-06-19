@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.diogenes.wolfpack.WolfPack;
+import com.diogenes.wolfpack.assets.AssetLoader;
 import com.diogenes.wolfpack.battle.BattleState;
 import com.diogenes.wolfpack.campaign.Campaign;
 import com.diogenes.wolfpack.campaign.CampActionType;
@@ -22,6 +23,7 @@ public class CampScreen implements Screen {
     private final Campaign campaign;
     private final CampManager campManager;
     private final List<Wolf> wolves;
+    private final AssetLoader assets;
 
     private BattleState currentState;
 
@@ -32,12 +34,13 @@ public class CampScreen implements Screen {
     private String campResultMessage;
     private final List<Enemy> battleEnemies;
 
-    public CampScreen(final WolfPack game, final Campaign campaign, final List<Enemy> battleEnemies) {
+    public CampScreen(final WolfPack game, final Campaign campaign, final List<Enemy> battleEnemies, final AssetLoader assets) {
         this.game = game;
         this.campaign = campaign;
         this.campManager = new CampManager();
         this.wolves = campaign.getWolves();
         this.battleEnemies = battleEnemies;
+        this.assets = assets;
     }
 
     @Override
@@ -147,7 +150,7 @@ public class CampScreen implements Screen {
 
     private void advanceToNextDay() {
         campaign.advanceDay();
-        game.setScreen(new BattleScreen(game, campaign));
+        game.setScreen(new BattleScreen(game, campaign, game.assets));
     }
 
     private void draw() {
