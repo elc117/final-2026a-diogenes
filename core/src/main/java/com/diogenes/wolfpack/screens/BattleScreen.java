@@ -7,6 +7,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.diogenes.wolfpack.WolfPack;
 import com.diogenes.wolfpack.assets.AssetLoader;
 import com.diogenes.wolfpack.battle.BattleAction;
@@ -30,6 +32,7 @@ public class BattleScreen implements Screen {
     private final Campaign campaign;
     private final EncounterGenerator encounterGenerator;
     private final AssetLoader assets;
+    private final Viewport viewport;
 
     private BattleManager battleManager;
     private List<Wolf> wolves;
@@ -54,6 +57,8 @@ public class BattleScreen implements Screen {
         this.campaign = campaign;
         this.assets = assets;
         this.encounterGenerator = new EncounterGenerator();
+
+        viewport = new FitViewport(WolfPack.WORLD_WIDTH, WolfPack.WORLD_HEIGHT);
     }
 
     @Override
@@ -79,8 +84,8 @@ public class BattleScreen implements Screen {
     }
 
     @Override
-    public void resize(int i, int i1) {
-
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
     }
 
     @Override
@@ -256,7 +261,15 @@ public class BattleScreen implements Screen {
     }
 
     private void draw() {
+
+        viewport.apply();
+
+        game.batch.setProjectionMatrix(
+            viewport.getCamera().combined
+        );
+
         ScreenUtils.clear(Color.BLACK);
+
         game.batch.begin();
 
         // always draw base infos

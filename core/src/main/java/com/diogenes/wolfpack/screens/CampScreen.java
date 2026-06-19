@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.diogenes.wolfpack.WolfPack;
 import com.diogenes.wolfpack.assets.AssetLoader;
 import com.diogenes.wolfpack.battle.BattleState;
@@ -24,6 +26,7 @@ public class CampScreen implements Screen {
     private final CampManager campManager;
     private final List<Wolf> wolves;
     private final AssetLoader assets;
+    private final Viewport viewport;
 
     private BattleState currentState;
 
@@ -41,6 +44,7 @@ public class CampScreen implements Screen {
         this.wolves = campaign.getWolves();
         this.battleEnemies = battleEnemies;
         this.assets = assets;
+        this.viewport = new FitViewport(WolfPack.WORLD_WIDTH, WolfPack.WORLD_HEIGHT);
     }
 
     @Override
@@ -154,7 +158,15 @@ public class CampScreen implements Screen {
     }
 
     private void draw() {
+
+        viewport.apply();
+
+        game.batch.setProjectionMatrix(
+            viewport.getCamera().combined
+        );
+
         ScreenUtils.clear(Color.BLACK);
+
         game.batch.begin();
 
         int y = 460;

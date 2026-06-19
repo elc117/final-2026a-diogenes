@@ -22,6 +22,9 @@ public class WolfPack extends Game {
     public ShapeRenderer shapeRenderer;
     public AssetLoader assets;
 
+    public static final float WORLD_WIDTH = 1280;
+    public static final float WORLD_HEIGHT = 720;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
