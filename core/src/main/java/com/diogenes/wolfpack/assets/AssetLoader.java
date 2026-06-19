@@ -31,6 +31,9 @@ public class AssetLoader {
     public TextureRegion iconAttackDown;
     public TextureRegion iconMarked;
 
+    public TextureRegion whitePixel;
+    public Texture winterBackground;
+
     public void load() {
         wolfSheet = new Texture(Gdx.files.internal("sprites/wolf_tailwag_full.png"));
         TextureRegion[][] wolfGrid = TextureRegion.split(wolfSheet, 32, 32);
@@ -60,6 +63,10 @@ public class AssetLoader {
         iconSheet = new Texture(Gdx.files.internal("ui/16x16.png"));
         TextureRegion[][] iconGrid = TextureRegion.split(iconSheet, 16, 16);
 
+        whitePixel = new TextureRegion(new Texture(Gdx.files.internal("ui/white.png")));
+
+        winterBackground = new Texture(Gdx.files.internal("backgrounds/battlebg.png"));
+
         // TODO: this are placeholders
         iconBleed      = iconGrid[0][12];
         iconAttackUp   = iconGrid[0][1];
@@ -78,5 +85,6 @@ public class AssetLoader {
         if (bossBearSheet != null) bossBearSheet.dispose();
         if (rabbitSheet != null) rabbitSheet.dispose();
         if (iconSheet != null) iconSheet.dispose();
+        if (winterBackground != null) winterBackground.dispose();
     }
 }
