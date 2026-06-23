@@ -14,7 +14,7 @@ public class QuickPounce extends Skill {
     @Override
     protected void execute(Unit user, Unit target) {
         target.takeDamage(user.getAttack());
-        if(!user.hasStatusEffect(AttackUp.class))
-            user.addStatusEffect(new AttackUp(SELF_BUFF_DURATION));
+
+        user.addStatusEffect(new AttackUp(SELF_BUFF_DURATION));
     }
 }

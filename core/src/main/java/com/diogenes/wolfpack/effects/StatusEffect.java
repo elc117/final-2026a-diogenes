@@ -28,5 +28,15 @@ abstract public class StatusEffect {
 
     abstract public void onRemove(Unit target);
 
+    public void setDuration(int duration) {
+        this.duration = Math.max(0, duration);
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
     public String getName() { return name; }
+
+
 }

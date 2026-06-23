@@ -61,9 +61,15 @@ public abstract class Unit {
         return realHeal;
     }
 
-    public void addStatusEffect(StatusEffect effect){
-        this.statusEffects.add(effect);
-        effect.onApply(this);
+    public void addStatusEffect(StatusEffect newEffect) {
+        for (StatusEffect existing : this.statusEffects) {
+            if (existing.getClass() == newEffect.getClass()) {
+                existing.setDuration(Math.max(existing.getDuration(), newEffect.getDuration()));
+                return;
+            }
+        }
+        this.statusEffects.add(newEffect);
+        newEffect.onApply(this);
     }
 
     public void removeStatusEffect(StatusEffect effect){
