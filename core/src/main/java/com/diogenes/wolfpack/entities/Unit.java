@@ -35,10 +35,11 @@ public abstract class Unit {
         return hp > 0;
     }
 
-    public int takeDamage(int damage){
-        if(hasStatusEffect(Marked.class)){
-            damage = (int)(damage * 1.5);
-            removeStatusEffect(getStatusEffect(Marked.class));
+    public int takeDamage(int damage) {
+        // cause the statuseffects handled this way remove themselves in middle of the loop
+        // we have to make loop backwards
+        for (int i = statusEffects.size() - 1; i >= 0; i--) {
+            damage = statusEffects.get(i).onIncomingDamage(damage, this);
         }
 
         int realDamage = Math.max(1, damage - defense);

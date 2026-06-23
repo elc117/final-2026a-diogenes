@@ -28,6 +28,10 @@ abstract public class StatusEffect {
 
     abstract public void onRemove(Unit target);
 
+    public int onIncomingDamage(int damage, Unit target) {
+        return damage;
+    }
+
     public void setDuration(int duration) {
         this.duration = Math.max(0, duration);
     }
