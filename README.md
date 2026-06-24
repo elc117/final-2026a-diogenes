@@ -91,6 +91,8 @@ sprites, lobo: https://finalbossblues.itch.io/wolf-pack
 
 sprites, icones: https://clockworkraven.itch.io/raven-fantasy-icons
 
+tabela backend: https://docs.google.com/spreadsheets/d/1Dz5QWm4optUWYEsmMx_P-nFdY6pRRAHIahYo_ka5ivw/edit?gid=0#gid=0
+
 
 
 abaixo prompts exemplo pra geração das telas(front-end):
